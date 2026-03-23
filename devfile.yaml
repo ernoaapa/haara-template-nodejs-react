@@ -1,0 +1,21 @@
+schemaVersion: 2.2.0
+metadata:
+  name: react-app
+  language: javascript
+  projectType: nodejs
+components:
+  - name: runtime
+    container:
+      image: node:20-alpine
+      mountSources: true
+      endpoints:
+        - name: http
+          targetPort: 3000
+commands:
+  - id: dev
+    exec:
+      component: runtime
+      commandLine: npm install && npm run dev
+      group:
+        kind: run
+        isDefault: true
