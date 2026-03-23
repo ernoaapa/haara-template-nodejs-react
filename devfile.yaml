@@ -10,12 +10,18 @@ components:
       mountSources: true
       endpoints:
         - name: http
-          targetPort: 3000
+          targetPort: 80
+  - name: production
+    image:
+      imageName: placeholder
+      dockerfile:
+        uri: ./Dockerfile
+        buildContext: .
 commands:
   - id: dev
     exec:
       component: runtime
-      commandLine: npm install && npm run dev
+      commandLine: npm install && npm run dev -- --host 0.0.0.0 --port 80
       group:
         kind: run
         isDefault: true
